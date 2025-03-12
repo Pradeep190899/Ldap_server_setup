@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #userDetails { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Search User Details</h2>
+    <input type="text" id="searchBox" placeholder="Enter user name" />
+    <button onclick="searchUser()">Search</button>
+    <div id="userDetails"></div>
+
+    <script>
+        function searchUser() {
+            const searchValue = document.getElementById('searchBox').value.toLowerCase();
+            const userDetailsDiv = document.getElementById('userDetails');
+    
+            fetch(`http://localhost:3000/search?username=${searchValue}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        userDetailsDiv.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        const user = data[0]; // Assume first result is needed
+                        userDetailsDiv.innerHTML = `<p><strong>Name:</strong> ${user.cn}</p>
+                                                    <p><strong>Email:</strong> ${user.mail}</p>
+                                                    <p><strong>UID:</strong> ${user.uidNumber}</p>`;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+    
+</body>
+</html>
