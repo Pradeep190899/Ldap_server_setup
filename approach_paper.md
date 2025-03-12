@@ -52,6 +52,8 @@ To set up an LDAP 389-Directory Server using Podman and implement a UI-based LDA
 ### 3.1. Architecture Diagram
 _(Insert architecture diagram here)_  
 
+
+
 ### 3.2. Description
 This approach involves deploying the 389-DS LDAP server inside a Podman container. Users are added through an LDIF file, and the system is managed using Apache Directory Studio. A simple web UI is built to search for users by name.  
 
